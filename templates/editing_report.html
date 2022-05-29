@@ -1,0 +1,41 @@
+{% extends './layout.html' %}
+
+{% block Title %} Editando reporte {% endblock Title %}
+
+{% block CSS %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+{% endblock %}
+
+{% block Body %}
+
+
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Editando reporte</h3>
+            <br>
+                    {% for reporte in reportes %}
+                    solicitud.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[0]}}"><br><br>
+                    acreditacion.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[1]}}"><br><br>
+                    acta_constitutiva.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[2]}}"><br><br>
+                    identificacion.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[3]}}"><br><br>
+                    ubicacion.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[4]}}"><br><br>
+                    plano.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[5]}}"><br><br>
+                    carta_poder.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[6]}}"><br><br>
+                    estatus.pdf
+                    <input required type="file" class="form-control" placeholder="Solicitud" name="solicitud" id="solicitud" value="{{reporte[7]}}"><br><br>
+                    {% endfor %}
+
+            <a href="{{url_for('home')}}" class="button is-primary mt-2">Volver</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
