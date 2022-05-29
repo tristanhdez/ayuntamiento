@@ -7,7 +7,7 @@ from datetime import timedelta
 from functools import wraps
 
 
-conn = mysql.connector.connect(host="localhost", port="3306", user="root", password=":)", database="")
+conn = mysql.connector.connect(host="localhost", port="3306", user="root", password="Password123*", database="townhall")
 cursor= conn.cursor()
 
 app = Flask(__name__)
