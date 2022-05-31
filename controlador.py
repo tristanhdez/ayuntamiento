@@ -185,3 +185,42 @@ def download_pdf_file():
         except:
             pass
         return
+
+def getting_users():
+    connection = obtener_conexion()
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM `usuario`")
+        users = cursor.fetchall()
+    connection.close()
+    return users
+
+def getting_specific_user(id):
+    connection = obtener_conexion()
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM `usuario` WHERE idusuario = %s", (id,))
+        user = cursor.fetchall()
+    connection.close()
+    return user
+
+def editing_user(id,user,password,privilege):
+    connection = obtener_conexion()
+    cursor = connection.cursor()
+    query="UPDATE `usuario` SET `idusuario` = %s, `user` = %s, `password` = %s, `idprivilegios` = %s WHERE `usuario`.`idusuario` = %s"
+    data = (id, user, password, privilege, id)
+    cursor.execute(query,data)
+    connection.commit()
+
+def deleting_user(id):
+    connection = obtener_conexion()
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM usuario WHERE `usuario`.`idusuario` =%s", (id,))
+    connection.commit()
+    connection.close()
+
+def creating_user(user,password,privilege):
+    connection = obtener_conexion()
+    cursor = connection.cursor()
+    query="INSERT INTO `usuario` (`idusuario`, `user`, `password`, `idprivilegios`) VALUES (NULL, %s, %s, %s)"
+    data = (user, password, privilege)
+    cursor.execute(query,data)
+    connection.commit()

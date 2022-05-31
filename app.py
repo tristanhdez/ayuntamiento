@@ -549,8 +549,51 @@ def internal_error(error):
 def method_not_found(error):
     return render_template('error-405.html'), 405
 
+@app.route('/usuarios')
+@admin_required
+def users():
+    users = controlador.getting_users()
+    return render_template('users.html', users=users)
+
+@app.route('/editar_usuario/<int:id>')
+@admin_required
+def edit_user(id):
+    users = controlador.getting_specific_user(id)
+    return render_template('edit_user.html', users=users)
+
+@app.route('/eliminando_usuario/<int:id>')
+@admin_required
+def deleting_user(id):
+    controlador.deleting_user(id)
+    return redirect(url_for('users'))
+
+@app.route('/editando_usuario', methods=['POST'])
+@admin_required
+def editing_user():
+    if request.method == 'POST':
+        id_user = request.form['id_user']
+        user = request.form['user']
+        password = request.form['password']
+        privilege = request.form['privilege']
+        controlador.editing_user(id_user,user,password,privilege)
+        return redirect(url_for('users'))
 
 
+@app.route('/crear_usuario')
+@admin_required
+def create_user():
+    return render_template("create_user.html")
+
+@app.route('/creando_usuario', methods=['POST'])
+@admin_required
+def creating_user():
+    if request.method == 'POST':
+        user = request.form['user']
+        password = request.form['password']
+        privilege = request.form['privilege']
+        controlador.creating_user(user,password,privilege)
+        return redirect(url_for('users'))
+    
 @app.route('/descargar_pdf')
 @capturist_required
 def download():

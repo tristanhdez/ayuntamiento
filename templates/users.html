@@ -1,0 +1,46 @@
+{% extends './layout.html' %}
+
+{% block Title %} Reportes {% endblock Title %}
+
+{% block CSS %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+{% endblock %}
+
+{% block Body %}
+
+
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Usuarios</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id Usuario</th>
+                        <th>Usuario</th>
+                        <th>Contraseña</th>
+                        <th>Privilegio (1 = Alto, 2 = Medio, 3 = Bajo)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{user[0]}}</td>
+                        <td><a href="#"> {{user[1]}} </a></td>
+                        <td><a href="#"> {{user[2]}} </a></td>
+                        <td><a href="#"> {{user[3]}} </a></td>
+                        <td><a href="/editar_usuario/{{user[0]}}" class="button is-primary mt-2">Editar</a>  <a href="/eliminando_usuario/{{user[0]}}" class="button is-primary mt-2">Eliminar</a></td>
+                        
+                    </tr>
+                   
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{url_for('create_user')}}" class="button is-primary mt-2">Agregar Usuario</a>
+            <a href="{{url_for('home')}}" class="button is-primary mt-2">Volver</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
